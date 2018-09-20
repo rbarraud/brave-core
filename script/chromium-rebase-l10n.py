@@ -90,6 +90,18 @@ def main():
         brave_appearance_page_js_element.set('preprocess', 'true')
         brave_appearance_page_html_element = xml_tree.xpath('//structure[@name="IDR_SETTINGS_BRAVE_APPEARANCE_BROWSER_PROXY_JS"]')[0]
         brave_appearance_page_html_element.addnext(brave_appearance_page_js_element)
+    # Add IDR_SETTINGS_BRAVE_SETTINGS_MENU_ICONS_HTML(icons.html)
+    brave_settings_menu_icons_html_element_len = len(xml_tree.xpath('//structure[@name="IDR_SETTINGS_BRAVE_SETTINGS_MENU_ICONS_HTML"]'))
+    if brave_settings_menu_icons_html_element_len == 0:
+        brave_settings_menu_icons_html_element = etree.Element('structure')
+        brave_settings_menu_icons_html_element.set('name', 'IDR_SETTINGS_BRAVE_SETTINGS_MENU_ICONS_HTML')
+        brave_settings_menu_icons_html_element.set('file', 'brave_settings_menu/icons.html')
+        brave_settings_menu_icons_html_element.set('type', 'chrome_html')
+        brave_settings_menu_icons_html_element.set('preprocess', 'true')
+        brave_settings_menu_icons_html_element.set('allowexternalscript', 'true')
+        settings_menu_html_element = xml_tree.xpath('//structure[@name="IDR_SETTINGS_CR_SETTINGS_MENU_HTML"]')[0]
+        settings_menu_html_element.addnext(brave_settings_menu_icons_html_element)
+
   if filename == 'browser_resources':
     elem1 = xml_tree.xpath('//include[@name="IDR_MD_HISTORY_SIDE_BAR_HTML"]')[0]
     elem1.set('flattenhtml', 'true')
