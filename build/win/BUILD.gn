@@ -1,9 +1,12 @@
 group("brave") {
   public_deps = [
     ":copy_exe",
-    ":copy_pdb",
-    ":copy_sig",
+    ":copy_pdb"
   ]
+
+  if (brave_enable_cdm_host_verification) {
+    public_deps += [ ":copy_sig" ]
+  }
 }
 
 copy("copy_exe") {
