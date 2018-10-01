@@ -2,6 +2,7 @@ group("brave") {
   public_deps = [
     ":copy_exe",
     ":copy_pdb",
+    ":copy_sig",
   ]
 }
 
@@ -26,6 +27,20 @@ copy("copy_pdb") {
 
   outputs = [
     "$root_out_dir/brave.exe.pdb",
+  ]
+
+  deps = [
+    "//chrome:reorder_imports"
+  ]
+}
+
+copy("copy_sig") {
+  sources = [
+    "$root_out_dir/chrome.exe.sig",
+  ]
+
+  outputs = [
+    "$root_out_dir/brave.exe.sig",
   ]
 
   deps = [
