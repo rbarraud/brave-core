@@ -1,14 +1,8 @@
-import("//brave/build/config.gni")
-
 group("brave") {
   public_deps = [
     ":copy_exe",
     ":copy_pdb",
   ]
-
-  if (brave_enable_cdm_host_verification) {
-    public_deps += [ ":copy_sig" ]
-  }
 }
 
 copy("copy_exe") {
@@ -32,20 +26,6 @@ copy("copy_pdb") {
 
   outputs = [
     "$root_out_dir/brave.exe.pdb",
-  ]
-
-  deps = [
-    "//chrome:reorder_imports"
-  ]
-}
-
-copy("copy_sig") {
-  sources = [
-    "$root_out_dir/chrome.exe.sig",
-  ]
-
-  outputs = [
-    "$root_out_dir/brave.exe.sig",
   ]
 
   deps = [
