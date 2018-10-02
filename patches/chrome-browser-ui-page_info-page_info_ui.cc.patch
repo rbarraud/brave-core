@@ -7,7 +7,7 @@ index 16c119ddfdddbc5dd84ea251e4fbb27771537963..6b8858742fb0ba832a365e9411e47e16
        icon = &vector_icons::kUsbIcon;
        break;
 +    case CONTENT_SETTINGS_TYPE_AUTOPLAY:
-+      icon = &kExtensionIcon;
++      icon = &kPlayArrowIcon;
 +      break;
      default:
        // All other |ContentSettingsType|s do not have icons on desktop or are

@@ -32,7 +32,7 @@ void BraveAutoplayBlockedImageModel::UpdateFromWebContents(
 
   set_visible(true);
   const gfx::VectorIcon* badge_id = &kBlockedBadgeIcon;
-  const gfx::VectorIcon* icon = &kExtensionIcon;
+  const gfx::VectorIcon* icon = &kPlayArrowIcon;
   set_icon(*icon, *badge_id);
   set_explanatory_string_id(IDS_BLOCKED_AUTOPLAY_TITLE);
   set_tooltip(l10n_util::GetStringUTF16(IDS_BLOCKED_AUTOPLAY_TITLE));
