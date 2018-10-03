@@ -1,0 +1,14 @@
+diff --git a/content/browser/media/cdm_registry_impl.cc b/content/browser/media/cdm_registry_impl.cc
+index 81936b7601aa72effc5f99a188da72f8b9469568..42c5eb9d65db5783797162b8d460fb445b551ef9 100644
+--- a/content/browser/media/cdm_registry_impl.cc
++++ b/content/browser/media/cdm_registry_impl.cc
+@@ -37,6 +37,9 @@ void CdmRegistryImpl::RegisterCdm(const CdmInfo& info) {
+   // use the same registered CDM for a given key system. This also means that
+   // some later registered CDMs (component updated) will not be used until
+   // browser restart, which is fine in most cases.
++  LOG(ERROR) << "BSC]] CdmRegistryImpl::RegisterCdm: "
++    << "name=" << info.name
++    << "; path=" << info.path;
+   cdms_.push_back(info);
+ }
+ 

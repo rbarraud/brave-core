@@ -1,0 +1,26 @@
+diff --git a/content/browser/media/key_system_support_impl.cc b/content/browser/media/key_system_support_impl.cc
+index 624cca51aa852472b61510707619eeb049f56f9b..5bcbad2875e050614b9df1c62fd398153fb3633d 100644
+--- a/content/browser/media/key_system_support_impl.cc
++++ b/content/browser/media/key_system_support_impl.cc
+@@ -145,6 +145,7 @@ void KeySystemSupportImpl::Create(
+ // static
+ std::unique_ptr<CdmInfo> KeySystemSupportImpl::GetCdmInfoForKeySystem(
+     const std::string& key_system) {
++  LOG(ERROR) << "BSC]] KeySystemSupportImpl::GetCdmInfoForKeySystem";
+   DVLOG(2) << __func__ << ": key_system = " << key_system;
+   for (const auto& cdm : CdmRegistry::GetInstance()->GetAllRegisteredCdms()) {
+     if (cdm.supported_key_system == key_system ||
+@@ -168,11 +169,13 @@ void KeySystemSupportImpl::IsKeySystemSupported(
+ 
+   auto cdm_info = GetCdmInfoForKeySystem(key_system);
+   if (!cdm_info) {
++    LOG(ERROR) << "BSC]] IsKeySystemSupported - falsey; exiting";
+     SendCdmAvailableUMA(key_system, false);
+     std::move(callback).Run(false, nullptr);
+     return;
+   }
+ 
++  LOG(ERROR) << "BSC]] IsKeySystemSupported - truthy";
+   SendCdmAvailableUMA(key_system, true);
+ 
+   // Supported codecs and encryption schemes.
