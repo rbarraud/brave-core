@@ -52,8 +52,10 @@ void MediaFetcher::Start() {
   SystemNetworkContextManager* system_network_context_manager =
       g_browser_process->system_network_context_manager();
   // In unit tests, the browser process can return a NULL context manager
-  if (!system_network_context_manager)
+  if (!system_network_context_manager) {
+    callback_.Run(false, NULL);
     return;
+  }
   network::mojom::URLLoaderFactory* loader_factory =
       system_network_context_manager->GetURLLoaderFactory();
   if (loader_factory) {
@@ -69,13 +71,14 @@ void MediaFetcher::Start() {
 void MediaFetcher::OnFetchComplete(const GURL& url,
                                    const SkBitmap* bitmap) {
   if (!bitmap) {
+    callback_.Run(false, NULL);
     return;
   }
 
   // Decode the downloaded bitmap.
   // Ownership of the image is taken by |cache_|.
   gfx::Image image = gfx::Image::CreateFrom1xBitmap(*bitmap);
-  callback_.Run(&image);
+  callback_.Run(true, &image);
 }
 
 }  // namespace brave_rewards

@@ -140,7 +140,9 @@ class RewardsServiceImpl : public RewardsService,
   void TriggerOnContentSiteUpdated();
   void OnPublisherListLoaded(ledger::LedgerCallbackHandler* handler,
                              const std::string& data);
-  void OnFavIconDownload(const std::string& publisher_key, const gfx::Image* image);
+  void OnFavIconDownload(const std::string& publisher_key,
+                         bool status,
+                         const gfx::Image* image);
 
   // ledger::LedgerClient
   std::string GenerateGUID() const override;

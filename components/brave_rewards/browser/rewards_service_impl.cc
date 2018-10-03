@@ -1187,7 +1187,9 @@ void RewardsServiceImpl::OnFavIconUrl(const std::string& url, const std::string&
   downloader->Start();
 }
 
-void RewardsServiceImpl::OnFavIconDownload(const std::string& publisher_key, const gfx::Image* image) {
+void RewardsServiceImpl::OnFavIconDownload(const std::string& publisher_key,
+                                           bool status,
+                                           const gfx::Image* image) {
   LOG(ERROR) << "NEJC333" << publisher_key;
 }
 
