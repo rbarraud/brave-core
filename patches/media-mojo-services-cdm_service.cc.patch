@@ -1,0 +1,44 @@
+diff --git a/media/mojo/services/cdm_service.cc b/media/mojo/services/cdm_service.cc
+index 1fdc540dd7585cf85c564e6df7c848a9dbeee40d..f276fee76b5ea56ce8dc4d6b5ad97d6ea6c6218c 100644
+--- a/media/mojo/services/cdm_service.cc
++++ b/media/mojo/services/cdm_service.cc
+@@ -212,8 +212,10 @@ void CdmService::LoadCdm(const base::FilePath& cdm_path) {
+   if (!client_)
+     return;
+ 
++  LOG(ERROR) << "BSC]] CdmService::LoadCdm 1";
+   CdmModule* instance = CdmModule::GetInstance();
+   if (instance->was_initialize_called()) {
++    LOG(ERROR) << "BSC]] CdmService::LoadCdm 2: initialize was called";
+     DCHECK_EQ(cdm_path, instance->GetCdmPath());
+     return;
+   }
+@@ -238,10 +240,14 @@ void CdmService::LoadCdm(const base::FilePath& cdm_path) {
+ #endif  // defined(OS_MACOSX)
+ 
+ #if BUILDFLAG(ENABLE_CDM_HOST_VERIFICATION)
++  LOG(ERROR) << "BSC]] CdmService::LoadCdm 3";
+   std::vector<CdmHostFilePath> cdm_host_file_paths;
+   client_->AddCdmHostFilePaths(&cdm_host_file_paths);
++  LOG(ERROR) << "BSC]] CdmService::LoadCdm 4";
+   bool success = instance->Initialize(cdm_path, cdm_host_file_paths);
++  LOG(ERROR) << "BSC]] CdmService::LoadCdm 5";
+ #else
++  LOG(ERROR) << "BSC]] CdmService::LoadCdm 6 - UNVERIFIED!!!11";
+   bool success = instance->Initialize(cdm_path);
+ #endif  // BUILDFLAG(ENABLE_CDM_HOST_VERIFICATION)
+ 
+@@ -254,8 +260,12 @@ void CdmService::LoadCdm(const base::FilePath& cdm_path) {
+ #endif  // defined(OS_MACOSX)
+ 
+   // Always called within the sandbox.
+-  if (success)
++  if (success) {
++    LOG(ERROR) << "BSC]] CdmService::LoadCdm 7 - calling InitializeCdmModule";
+     instance->InitializeCdmModule();
++  } else {
++    LOG(ERROR) << "BSC]] CdmService::LoadCdm 8 - success=falsey";
++  }
+ }
+ 
+ void CdmService::CreateCdmFactory(

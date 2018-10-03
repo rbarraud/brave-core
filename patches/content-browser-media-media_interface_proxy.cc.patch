@@ -1,0 +1,21 @@
+diff --git a/content/browser/media/media_interface_proxy.cc b/content/browser/media/media_interface_proxy.cc
+index 82b0c8c61ac4fc623056c96e62a002c1a8c79067..224bf0c8c29f722aee74ce262373bb3c94e0694e 100644
+--- a/content/browser/media/media_interface_proxy.cc
++++ b/content/browser/media/media_interface_proxy.cc
+@@ -331,7 +331,7 @@ media::mojom::CdmFactory* MediaInterfaceProxy::ConnectToCdmService(
+     const std::string& cdm_guid,
+     const base::FilePath& cdm_path,
+     const std::string& cdm_file_system_id) {
+-  DVLOG(1) << __func__ << ": cdm_guid = " << cdm_guid;
++  LOG(ERROR) << __func__ << ": cdm_guid = " << cdm_guid;
+ 
+   DCHECK(!cdm_factory_map_.count(cdm_guid));
+   service_manager::Identity identity(media::mojom::kCdmServiceName,
+@@ -354,6 +354,7 @@ media::mojom::CdmFactory* MediaInterfaceProxy::ConnectToCdmService(
+ 
+   cdm_service->LoadCdm(cdm_path, std::move(token_provider_ptr));
+ #else
++  LOG(ERROR) << "BSC]] calling cdm_service->LoadCdm";
+   cdm_service->LoadCdm(cdm_path);
+ #endif  // defined(OS_MACOSX)
+ 
