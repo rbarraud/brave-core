@@ -1160,4 +1160,10 @@ void RewardsServiceImpl::OnPublisherActivity(ledger::Result result,
   }
 }
 
+
+
+void RewardsServiceImpl::OnFavIconUrl(const std::string& url, const std::string& publisher_key) {
+  LOG(ERROR) << "NEJC112" << url << publisher_key;
+}
+
 }  // namespace brave_rewards
