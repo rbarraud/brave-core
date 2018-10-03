@@ -215,6 +215,7 @@ class RewardsServiceImpl : public RewardsService,
   extensions::OneShotEvent ready_;
   std::map<const net::URLFetcher*, FetchCallback> fetchers_;
   std::map<uint32_t, std::unique_ptr<base::OneShotTimer>> timers_;
+  std::vector<std::string> current_media_fetchers_;
 
   uint32_t next_timer_id_;
 

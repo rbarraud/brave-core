@@ -72,7 +72,8 @@ void MediaFetcher::OnFetchComplete(const GURL& url,
     return;
   }
 
-  // Decode the downloaded bitmap. Ownership of the image is taken by |cache_|.
+  // Decode the downloaded bitmap.
+  // Ownership of the image is taken by |cache_|.
   gfx::Image image = gfx::Image::CreateFrom1xBitmap(*bitmap);
   callback_.Run(&image);
 }

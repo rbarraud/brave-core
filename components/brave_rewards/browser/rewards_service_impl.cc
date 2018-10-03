@@ -1162,8 +1162,6 @@ void RewardsServiceImpl::OnPublisherActivity(ledger::Result result,
   }
 }
 
-
-
 void RewardsServiceImpl::OnFavIconUrl(const std::string& url, const std::string& publisher_key) {
   LOG(ERROR) << "NEJC112" << url << publisher_key;
 
@@ -1172,6 +1170,15 @@ void RewardsServiceImpl::OnFavIconUrl(const std::string& url, const std::string&
   if (!parsedUrl.is_valid()) {
     return;
   }
+
+  std::vector<std::string>::iterator it;
+  it = find (current_media_fetchers_.begin(), current_media_fetchers_.end(), url);
+  if (it != current_media_fetchers_.end()) {
+    LOG(ERROR) << "ALREADY FETCHING";
+    return;
+  }
+
+  current_media_fetchers_.emplace_back(url);
 
   std::unique_ptr<brave_rewards::MediaFetcher> downloader(
       new brave_rewards::MediaFetcher(parsedUrl,
