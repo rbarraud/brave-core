@@ -10,6 +10,8 @@ source_set("browser") {
     "balance_report.h",
     "content_site.cc",
     "content_site.h",
+    "media_fetcher.cc",
+    "media_fetcher.h",
     "rewards_service.cc",
     "rewards_service.h",
     "rewards_service_factory.cc",

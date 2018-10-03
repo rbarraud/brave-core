@@ -55,6 +55,7 @@ int OnBeforeURLRequest_StaticRedirectWork(
 
     // Brave rewards media publishers
     URLPattern(URLPattern::SCHEME_HTTPS, "https://api.twitch.tv/v5/oembed*"),
+    URLPattern(URLPattern::SCHEME_HTTPS, "https://static-cdn.jtvnw.net/*"),
 
     // Safe browsing
     URLPattern(URLPattern::SCHEME_HTTPS, "https://safebrowsing.brave.com/v4/*"),

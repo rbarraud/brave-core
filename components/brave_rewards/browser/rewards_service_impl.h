@@ -21,6 +21,7 @@
 #include "extensions/common/one_shot_event.h"
 #include "net/url_request/url_fetcher_delegate.h"
 #include "brave/components/brave_rewards/browser/balance_report.h"
+#include "ui/gfx/image/image.h"
 
 namespace base {
 class SequencedTaskRunner;
@@ -139,6 +140,7 @@ class RewardsServiceImpl : public RewardsService,
   void TriggerOnContentSiteUpdated();
   void OnPublisherListLoaded(ledger::LedgerCallbackHandler* handler,
                              const std::string& data);
+  void OnFavIconDownload(const std::string& publisher_key, const gfx::Image* image);
 
   // ledger::LedgerClient
   std::string GenerateGUID() const override;

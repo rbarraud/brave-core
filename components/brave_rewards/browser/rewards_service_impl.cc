@@ -4,6 +4,7 @@
 #include "brave/components/brave_rewards/browser/rewards_service_impl.h"
 #include "brave/components/brave_rewards/browser/wallet_properties.h"
 #include "brave/components/brave_rewards/browser/balance_report.h"
+#include "brave/components/brave_rewards/browser/media_fetcher.h"
 
 #include <functional>
 #include <limits.h>
@@ -33,6 +34,7 @@
 #include "net/url_request/url_fetcher.h"
 #include "url/gurl.h"
 #include "url/url_canon_stdstring.h"
+#include "ui/gfx/image/image.h"
 
 #include "extensions/browser/event_router.h"
 #include "extensions/browser/extension_api_frame_id_map.h"
@@ -1164,6 +1166,22 @@ void RewardsServiceImpl::OnPublisherActivity(ledger::Result result,
 
 void RewardsServiceImpl::OnFavIconUrl(const std::string& url, const std::string& publisher_key) {
   LOG(ERROR) << "NEJC112" << url << publisher_key;
+
+  GURL parsedUrl(url);
+
+  if (!parsedUrl.is_valid()) {
+    return;
+  }
+
+  std::unique_ptr<brave_rewards::MediaFetcher> downloader(
+      new brave_rewards::MediaFetcher(parsedUrl,
+          base::Bind(&RewardsServiceImpl::OnFavIconDownload,
+              AsWeakPtr(), publisher_key)));
+  downloader->Start();
+}
+
+void RewardsServiceImpl::OnFavIconDownload(const std::string& publisher_key, const gfx::Image* image) {
+  LOG(ERROR) << "NEJC333" << publisher_key;
 }
 
 }  // namespace brave_rewards
